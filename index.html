@@ -2,134 +2,103 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gobierno de México - Retiros</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
       text-align: center;
-      padding: 20px;
+      background-color: #f0f0f0;
     }
-
     .container {
-      background: white;
+      background-color: white;
+      max-width: 400px;
+      margin: 50px auto;
       padding: 30px;
       border-radius: 10px;
-      max-width: 400px;
-      margin: auto;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-
-    img {
-      width: 150px;
-      margin-bottom: 20px;
-    }
-
-    input, select, button {
-      margin-top: 10px;
-      padding: 10px;
-      width: 90%;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-
-    button {
-      background-color: #007bff;
-      color: white;
-      cursor: pointer;
-    }
-
-    #retirarForm, #resultado, #procesando {
+    #retiroSection, #procesando, #resultado {
       display: none;
+    }
+    input, select, button {
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+    }
+    img {
+      width: 120px;
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <img src="logo.png" alt="Logo del Gobierno de México">
+    <h2>Gobierno de México - Retiros</h2>
+    <div id="login">
+      <input type="text" id="nombre" placeholder="Nombre completo">
+      <input type="password" id="clave" placeholder="Clave de acceso">
+      <button onclick="verificarAcceso()">Ingresar</button>
+    </div>
 
-<div class="container">
-  <img src="LOGO.png" alt="Logo del Gobierno de México">
-  <h2>Gobierno de México</h2>
-  <p>Retiros</p>
+    <div id="retiroSection">
+      <p><strong>Ganancia actual:</strong> 19,877 USD</p>
+      <select id="pais">
+        <option value="México">México</option>
+        <option value="Colombia">Colombia</option>
+        <option value="Venezuela">Venezuela</option>
+        <option value="Perú">Perú</option>
+        <option value="Ecuador">Ecuador</option>
+        <option value="Guatemala">Guatemala</option>
+        <option value="El Salvador">El Salvador</option>
+        <option value="Honduras">Honduras</option>
+        <option value="Nicaragua">Nicaragua</option>
+        <option value="Costa Rica">Costa Rica</option>
+      </select>
 
-  <div id="loginForm">
-    <input type="text" id="nombre" placeholder="Nombre completo" required><br>
-    <input type="password" id="clave" placeholder="Clave de acceso"><br>
-    <button onclick="verificarClave()">Ingresar</button>
+      <select id="metodo">
+        <option value="cuenta">Transferencia bancaria</option>
+        <option value="tarjeta">Tarjeta</option>
+        <option value="cripto">Criptomoneda</option>
+      </select>
+
+      <input type="text" id="datoPago" placeholder="Número de cuenta / tarjeta / billetera">
+      <button onclick="procesarRetiro()">Solicitar retiro</button>
+    </div>
+
+    <div id="procesando">
+      <p>Procesando retiro... espere por favor.</p>
+    </div>
+
+    <div id="resultado">
+      <h3>✅ Retiro exitoso</h3>
+      <p>Sus fondos han sido enviados correctamente.</p>
+    </div>
   </div>
 
-  <div id="retirarForm">
-    <p><strong>Ganancia disponible:</strong> <span style="color: green;">19.877 USD</span></p>
-    <select id="pais">
-      <option value="">Selecciona tu país</option>
-      <option>Mexico</option>
-      <option>Venezuela</option>
-      <option>Perú</option>
-      <option>Ecuador</option>
-      <option>Bolivia</option>
-      <option>Honduras</option>
-      <option>Guatemala</option>
-      <option>El Salvador</option>
-      <option>Panamá</option>
-      <option>Costa Rica</option>
-    </select><br>
+  <script>
+    const claveAsignada = "SAT2025";
 
-    <select id="tipoRetiro" onchange="mostrarCampos()">
-      <option value="">Tipo de retiro</option>
-      <option value="banco">Cuenta bancaria</option>
-      <option value="tarjeta">Tarjeta</option>
-      <option value="cripto">Criptomonedas</option>
-    </select><br>
-
-    <input type="text" id="datoRetiro" placeholder="Ingrese el número de cuenta/tarjeta/clave"><br>
-    <button onclick="procesarRetiro()">Retirar</button>
-  </div>
-
-  <div id="procesando">
-    <p>Procesando retiro...</p>
-  </div>
-
-  <div id="resultado">
-    <h3>✅ Retiro exitoso</h3>
-    <p>Tu retiro ha sido completado.</p>
-  </div>
-</div>
-
-<script>
-  function verificarClave() {
-    const clave = document.getElementById('clave').value;
-    if (clave === 'SAT2025') {
-      document.getElementById('loginForm').style.display = 'none';
-      document.getElementById('retirarForm').style.display = 'block';
-    } else {
-      alert('Clave incorrecta');
+    function verificarAcceso() {
+      const clave = document.getElementById("clave").value;
+      if (clave === claveAsignada) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("retiroSection").style.display = "block";
+      } else {
+        alert("Clave incorrecta");
+      }
     }
-  }
 
-  function mostrarCampos() {
-    const tipo = document.getElementById('tipoRetiro').value;
-    const input = document.getElementById('datoRetiro');
+    function procesarRetiro() {
+      document.getElementById("retiroSection").style.display = "none";
+      document.getElementById("procesando").style.display = "block";
 
-    if (tipo === 'banco') {
-      input.placeholder = 'Ingrese número de cuenta bancaria';
-    } else if (tipo === 'tarjeta') {
-      input.placeholder = 'Ingrese número de tarjeta';
-    } else if (tipo === 'cripto') {
-      input.placeholder = 'Ingrese clave o billetera';
-    } else {
-      input.placeholder = '';
+      setTimeout(() => {
+        document.getElementById("procesando").style.display = "none";
+        document.getElementById("resultado").style.display = "block";
+      }, 3000);
     }
-  }
-
-  function procesarRetiro() {
-    document.getElementById('retirarForm').style.display = 'none';
-    document.getElementById('procesando').style.display = 'block';
-
-    setTimeout(() => {
-      document.getElementById('procesando').style.display = 'none';
-      document.getElementById('resultado').style.display = 'block';
-    }, 3000); // 3 segundos
-  }
-</script>
-
+  </script>
 </body>
 </html>
