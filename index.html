@@ -3,123 +3,118 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Retiros SAT</title>
+  <title>Retiros - Gobierno de México</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       text-align: center;
-      background-color: #f2f2f2;
+      background-color: #f0f0f0;
       padding: 20px;
     }
     .container {
-      max-width: 400px;
-      margin: auto;
       background: white;
       padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      border-radius: 15px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+    #logo {
+      max-width: 100px;
+      margin-bottom: 10px;
     }
     input, select, button {
       width: 100%;
-      padding: 10px;
       margin: 10px 0;
-      font-size: 16px;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
     }
-    #logo {
-      max-width: 200px;
-      margin-bottom: 20px;
-    }
-    .hidden {
-      display: none;
-    }
-    .success {
-      color: green;
+    #procesando, #resultado {
       font-weight: bold;
+      margin-top: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img id="logo" src="LOGO.png" alt="Logo Gobierno de México" />
-    <h2>Retiros SAT</h2>
-    <div id="login">
-      <input type="text" id="nombre" placeholder="Nombre completo" />
-      <input type="password" id="clave" placeholder="Contraseña" />
-      <button onclick="validar()">Ingresar</button>
-    </div>
+  <div class="container" id="login">
+    <img src="LOGO" id="logo" alt="Logo"/>
+    <h2>Gobierno de México</h2>
+    <p>Retiros del SAT</p>
+    <input type="text" id="nombre" placeholder="Nombre completo" required>
+    <input type="password" id="clave" placeholder="Clave de acceso" required>
+    <button onclick="verificar()">Ingresar</button>
+  </div>
 
-    <div id="formulario" class="hidden">
-      <p><strong>Ganancias actuales: 19.877 USD</strong></p>
+  <div class="container" id="formulario" style="display:none;">
+    <h2>Bienvenido, <span id="usuario"></span></h2>
+    <p>Saldo disponible: <strong>19,877 USD</strong></p>
+  
+    <select id="pais">
+      <option disabled selected>Selecciona tu país</option>
+      <option>Mexico</option>
+      <option>Venezuela</option>
+      <option>Ecuador</option>
+      <option>Perú</option>
+      <option>Bolivia</option>
+      <option>Chile</option>
+      <option>Paraguay</option>
+      <option>Uruguay</option>
+      <option>Honduras</option>
+      <option>El Salvador</option>
+    </select>
 
-      <select id="pais">
-        <option value="">Seleccione país</option>
-        <option>Colombia</option>
-        <option>Venezuela</option>
-        <option>Ecuador</option>
-        <option>Perú</option>
-        <option>Bolivia</option>
-        <option>Paraguay</option>
-        <option>Uruguay</option>
-        <option>Honduras</option>
-        <option>Guatemala</option>
-        <option>El Salvador</option>
-      </select>
+    <select id="metodo" onchange="mostrarCampos()">
+      <option disabled selected>Selecciona método de retiro</option>
+      <option value="tarjeta">Tarjeta</option>
+      <option value="transferencia">Transferencia</option>
+      <option value="cripto">Cripto</option>
+    </select>
 
-      <select id="metodo" onchange="mostrarCampos()">
-        <option value="">Seleccione tipo de retiro</option>
-        <option value="cuenta">Cuenta bancaria</option>
-        <option value="tarjeta">Tarjeta</option>
-        <option value="cripto">Criptomoneda</option>
-      </select>
-
-      <div id="datos"></div>
-      <button onclick="procesar()">Retirar</button>
-    </div>
-
-    <div id="resultado" class="hidden success">
-      <p>Procesando solicitud...</p>
-    </div>
-
-    <p style="text-align:center; font-size:12px; color:#555;">
-      Gobierno de México - Secretaría de Finanzas
-    </p>
+    <input type="text" id="detalle" placeholder="Ingresa los datos" style="display:none;">
+    <button onclick="procesar()">Solicitar retiro</button>
+    <div id="procesando" style="display:none;">Procesando solicitud...</div>
+    <div id="resultado" style="display:none; color: green;">✅ Retiro exitoso</div>
   </div>
 
   <script>
-    function validar() {
-      const nombre = document.getElementById("nombre").value;
-      const clave = document.getElementById("clave").value;
-      if (nombre && clave === "SAT2025") {
-        document.getElementById("login").classList.add("hidden");
-        document.getElementById("formulario").classList.remove("hidden");
+    function verificar() {
+      const nombre = document.getElementById('nombre').value.trim();
+      const clave = document.getElementById('clave').value.trim();
+
+      if (clave === "SAT2025") {
+        document.getElementById('login').style.display = 'none';
+        document.getElementById('formulario').style.display = 'block';
+        document.getElementById('usuario').innerText = nombre || "Usuario";
       } else {
-        alert("Nombre o contraseña incorrectos");
+        alert("Clave incorrecta");
       }
     }
 
     function mostrarCampos() {
-      const metodo = document.getElementById("metodo").value;
-      const datosDiv = document.getElementById("datos");
-      datosDiv.innerHTML = "";
-
-      if (metodo === "cuenta") {
-        datosDiv.innerHTML = '<input type="text" placeholder="Cuenta bancaria o CLABE">';
-      } else if (metodo === "tarjeta") {
-        datosDiv.innerHTML = '<input type="text" placeholder="Número de tarjeta">';
-      } else if (metodo === "cripto") {
-        datosDiv.innerHTML = '<input type="text" placeholder="Dirección de billetera cripto">';
+      const metodo = document.getElementById('metodo').value;
+      const detalle = document.getElementById('detalle');
+      if (metodo === 'tarjeta') {
+        detalle.placeholder = "Número de tarjeta";
+        detalle.style.display = 'block';
+      } else if (metodo === 'transferencia') {
+        detalle.placeholder = "Cuenta bancaria o CLABE";
+        detalle.style.display = 'block';
+      } else if (metodo === 'cripto') {
+        detalle.placeholder = "Dirección de wallet";
+        detalle.style.display = 'block';
+      } else {
+        detalle.style.display = 'none';
       }
     }
 
     function procesar() {
-      document.getElementById("formulario").classList.add("hidden");
-      const resultado = document.getElementById("resultado");
-      resultado.classList.remove("hidden");
-      resultado.innerHTML = "<p>Procesando solicitud...</p>";
-
+      document.getElementById('procesando').style.display = 'block';
+      document.getElementById('resultado').style.display = 'none';
       setTimeout(() => {
-        resultado.innerHTML = "<p class='success'>✅ Retiro exitoso</p>";
-      }, 2000);
+        document.getElementById('procesando').style.display = 'none';
+        document.getElementById('resultado').style.display = 'block';
+      }, 3000);
     }
   </script>
 </body>
