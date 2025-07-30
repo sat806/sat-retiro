@@ -1,4 +1,4 @@
-const claveAsignada = "clave123";
+const claveAsignada = "SAT2025";
 
 function validar() {
   const nombre = document.getElementById("nombre").value.trim();
