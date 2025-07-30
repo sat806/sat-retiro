@@ -1,121 +1,135 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Retiros - Gobierno de México</title>
+  <meta charset="UTF-8">
+  <title>Gobierno de México - Retiros</title>
   <style>
     body {
       font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
       text-align: center;
-      background-color: #f0f0f0;
       padding: 20px;
     }
+
     .container {
       background: white;
-      padding: 20px;
-      border-radius: 15px;
+      padding: 30px;
+      border-radius: 10px;
       max-width: 400px;
       margin: auto;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    #logo {
-      max-width: 100px;
-      margin-bottom: 10px;
+
+    img {
+      width: 150px;
+      margin-bottom: 20px;
     }
+
     input, select, button {
-      width: 100%;
-      margin: 10px 0;
+      margin-top: 10px;
       padding: 10px;
-      border-radius: 5px;
+      width: 90%;
       border: 1px solid #ccc;
+      border-radius: 5px;
     }
-    #procesando, #resultado {
-      font-weight: bold;
-      margin-top: 20px;
+
+    button {
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    #retirarForm, #resultado, #procesando {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <div class="container" id="login">
-    <img src="LOGO" id="logo" alt="Logo"/>
-    <h2>Gobierno de México</h2>
-    <p>Retiros del SAT</p>
-    <input type="text" id="nombre" placeholder="Nombre completo" required>
-    <input type="password" id="clave" placeholder="Clave de acceso" required>
-    <button onclick="verificar()">Ingresar</button>
+
+<div class="container">
+  <img src="LOGO.png" alt="Logo del Gobierno de México">
+  <h2>Gobierno de México</h2>
+  <p>Retiros</p>
+
+  <div id="loginForm">
+    <input type="text" id="nombre" placeholder="Nombre completo" required><br>
+    <input type="password" id="clave" placeholder="Clave de acceso"><br>
+    <button onclick="verificarClave()">Ingresar</button>
   </div>
 
-  <div class="container" id="formulario" style="display:none;">
-    <h2>Bienvenido, <span id="usuario"></span></h2>
-    <p>Saldo disponible: <strong>19,877 USD</strong></p>
-  
+  <div id="retirarForm">
+    <p><strong>Ganancia disponible:</strong> <span style="color: green;">19.877 USD</span></p>
     <select id="pais">
-      <option disabled selected>Selecciona tu país</option>
+      <option value="">Selecciona tu país</option>
       <option>Mexico</option>
       <option>Venezuela</option>
-      <option>Ecuador</option>
       <option>Perú</option>
+      <option>Ecuador</option>
       <option>Bolivia</option>
-      <option>Chile</option>
-      <option>Paraguay</option>
-      <option>Uruguay</option>
       <option>Honduras</option>
+      <option>Guatemala</option>
       <option>El Salvador</option>
-    </select>
+      <option>Panamá</option>
+      <option>Costa Rica</option>
+    </select><br>
 
-    <select id="metodo" onchange="mostrarCampos()">
-      <option disabled selected>Selecciona método de retiro</option>
+    <select id="tipoRetiro" onchange="mostrarCampos()">
+      <option value="">Tipo de retiro</option>
+      <option value="banco">Cuenta bancaria</option>
       <option value="tarjeta">Tarjeta</option>
-      <option value="transferencia">Transferencia</option>
-      <option value="cripto">Cripto</option>
-    </select>
+      <option value="cripto">Criptomonedas</option>
+    </select><br>
 
-    <input type="text" id="detalle" placeholder="Ingresa los datos" style="display:none;">
-    <button onclick="procesar()">Solicitar retiro</button>
-    <div id="procesando" style="display:none;">Procesando solicitud...</div>
-    <div id="resultado" style="display:none; color: green;">✅ Retiro exitoso</div>
+    <input type="text" id="datoRetiro" placeholder="Ingrese el número de cuenta/tarjeta/clave"><br>
+    <button onclick="procesarRetiro()">Retirar</button>
   </div>
 
-  <script>
-    function verificar() {
-      const nombre = document.getElementById('nombre').value.trim();
-      const clave = document.getElementById('clave').value.trim();
+  <div id="procesando">
+    <p>Procesando retiro...</p>
+  </div>
 
-      if (clave === "SAT2025") {
-        document.getElementById('login').style.display = 'none';
-        document.getElementById('formulario').style.display = 'block';
-        document.getElementById('usuario').innerText = nombre || "Usuario";
-      } else {
-        alert("Clave incorrecta");
-      }
-    }
+  <div id="resultado">
+    <h3>✅ Retiro exitoso</h3>
+    <p>Tu retiro ha sido completado.</p>
+  </div>
+</div>
 
-    function mostrarCampos() {
-      const metodo = document.getElementById('metodo').value;
-      const detalle = document.getElementById('detalle');
-      if (metodo === 'tarjeta') {
-        detalle.placeholder = "Número de tarjeta";
-        detalle.style.display = 'block';
-      } else if (metodo === 'transferencia') {
-        detalle.placeholder = "Cuenta bancaria o CLABE";
-        detalle.style.display = 'block';
-      } else if (metodo === 'cripto') {
-        detalle.placeholder = "Dirección de wallet";
-        detalle.style.display = 'block';
-      } else {
-        detalle.style.display = 'none';
-      }
+<script>
+  function verificarClave() {
+    const clave = document.getElementById('clave').value;
+    if (clave === 'SAT2025') {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('retirarForm').style.display = 'block';
+    } else {
+      alert('Clave incorrecta');
     }
+  }
 
-    function procesar() {
-      document.getElementById('procesando').style.display = 'block';
-      document.getElementById('resultado').style.display = 'none';
-      setTimeout(() => {
-        document.getElementById('procesando').style.display = 'none';
-        document.getElementById('resultado').style.display = 'block';
-      }, 3000);
+  function mostrarCampos() {
+    const tipo = document.getElementById('tipoRetiro').value;
+    const input = document.getElementById('datoRetiro');
+
+    if (tipo === 'banco') {
+      input.placeholder = 'Ingrese número de cuenta bancaria';
+    } else if (tipo === 'tarjeta') {
+      input.placeholder = 'Ingrese número de tarjeta';
+    } else if (tipo === 'cripto') {
+      input.placeholder = 'Ingrese clave o billetera';
+    } else {
+      input.placeholder = '';
     }
-  </script>
+  }
+
+  function procesarRetiro() {
+    document.getElementById('retirarForm').style.display = 'none';
+    document.getElementById('procesando').style.display = 'block';
+
+    setTimeout(() => {
+      document.getElementById('procesando').style.display = 'none';
+      document.getElementById('resultado').style.display = 'block';
+    }, 3000); // 3 segundos
+  }
+</script>
+
 </body>
 </html>
