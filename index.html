@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulador de Retiros SAT</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Simulador de Retiros SAT México</h1>
+
+    <div id="login">
+      <input type="text" id="nombre" placeholder="Ingresa tu nombre">
+      <input type="password" id="clave" placeholder="Clave asignada">
+      <button onclick="validar()">Ingresar</button>
+      <p id="login-error" class="error"></p>
+    </div>
+
+    <div id="formulario" style="display:none;">
+      <label>Selecciona tu país:</label>
+      <select id="pais">
+        <option>México</option>
+        <option>Colombia</option>
+        <option>Estados Unidos</option>
+      </select>
+
+      <label>Tipo de retiro:</label>
+      <select id="tipo">
+        <option>Transferencia bancaria</option>
+        <option>Tarjeta</option>
+        <option>Criptomonedas</option>
+      </select>
+
+      <button onclick="procesarRetiro()">Realizar Retiro</button>
+
+      <p id="resultado"></p>
+    </div>
+
+    <footer><small>Solo para fines educativos</small></footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
