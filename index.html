@@ -2,13 +2,14 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Retiros SAT</title>
+  <title>Simulador de Retiros SAT</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1> Retiros SAT México</h1>
-<img src="LOGO.png" alt="Logo del SAT" style="width:200px; display:block; margin:auto;">
+    <h1>Simulador de Retiros SAT México</h1>
+
+    <img src="LOGO.png" alt="Logo SAT" style="width:200px; display:block; margin: 20px auto;">
 
     <div id="login">
       <input type="text" id="nombre" placeholder="Ingresa tu nombre">
@@ -18,24 +19,32 @@
     </div>
 
     <div id="formulario" style="display:none;">
+      <h2>Hola <span id="usuario"></span>, tus ganancias disponibles son:</h2>
+      <h3 style="color:green;">💰 USD 19,877</h3>
+
       <label>Selecciona tu país:</label>
       <select id="pais">
-        <option>México</option>
-        <option>Peru</option>
-        <option>Chile</option>
-        <option>Guatemala</option>
-        <option>Salvador</option>
-        <option>Colombia</option>
+        <option>Mexico</option>
+        <option>Venezuela</option>
+        <option>Perú</option>
         <option>Ecuador</option>
+        <option>Bolivia</option>
+        <option>Chile</option>
         <option>Argentina</option>
+        <option>Panamá</option>
+        <option>Costa Rica</option>
+        <option>Honduras</option>
       </select>
 
       <label>Tipo de retiro:</label>
-      <select id="tipo">
-        <option>Transferencia bancaria</option>
-        <option>Tarjeta</option>
-        <option>Criptomonedas</option>
+      <select id="tipo" onchange="mostrarCampoAdicional()">
+        <option value="">Seleccionar</option>
+        <option value="transferencia">Transferencia bancaria</option>
+        <option value="tarjeta">Tarjeta</option>
+        <option value="cripto">Criptomonedas</option>
       </select>
+
+      <div id="campo-adicional" style="display:none; margin-top:10px;"></div>
 
       <button onclick="procesarRetiro()">Realizar Retiro</button>
 
