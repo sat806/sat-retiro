@@ -18,7 +18,7 @@
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    #retiroSection, #procesando, #resultado {
+    #retiroSection, #procesando, #resultado, #validando {
       display: none;
     }
     input, select, button {
@@ -30,9 +30,10 @@
       width: 180px;
       margin-bottom: 20px;
     }
-    #saludoUsuario {
+    #nombreUsuario {
+      margin-top: 10px;
       font-weight: bold;
-      margin-bottom: 10px;
+      color: #333;
     }
   </style>
 </head>
@@ -47,10 +48,13 @@
       <button onclick="verificarAcceso()">Ingresar</button>
     </div>
 
+    <div id="validando">
+      <p>🔒 Validando credenciales...</p>
+    </div>
+
     <div id="retiroSection">
-      <div id="saludoUsuario"></div>
+      <p id="nombreUsuario"></p>
       <p><strong>Ganancia actual:</strong> 19,877 USD</p>
-      
       <input type="number" id="monto" placeholder="Monto a retirar en USD">
 
       <select id="pais">
@@ -66,15 +70,13 @@
         <option value="Costa Rica">Costa Rica</option>
       </select>
 
-      <select id="metodo" onchange="actualizarCampoPago()">
-        <option value="">Seleccione método de retiro</option>
+      <select id="metodo" onchange="actualizarPlaceholder()">
         <option value="cuenta">Transferencia bancaria</option>
         <option value="tarjeta">Tarjeta</option>
         <option value="cripto">Criptomoneda</option>
       </select>
 
-      <input type="text" id="datoPago" placeholder="Ingrese datos de retiro">
-
+      <input type="text" id="datoPago" placeholder="Número de cuenta / tarjeta / billetera">
       <button onclick="procesarRetiro()">Solicitar retiro</button>
     </div>
 
@@ -94,36 +96,37 @@
     function verificarAcceso() {
       const clave = document.getElementById("clave").value;
       const nombre = document.getElementById("nombre").value;
-      if (clave === claveAsignada) {
+
+      if (clave === claveAsignada && nombre.trim() !== "") {
         document.getElementById("login").style.display = "none";
-        document.getElementById("retiroSection").style.display = "block";
-        document.getElementById("saludoUsuario").textContent = "Bienvenido, " + nombre;
+        document.getElementById("validando").style.display = "block";
+
+        setTimeout(() => {
+          document.getElementById("validando").style.display = "none";
+          document.getElementById("retiroSection").style.display = "block";
+          document.getElementById("nombreUsuario").textContent = `👤 Bienvenido: ${nombre}`;
+        }, 2000);
       } else {
-        alert("Clave incorrecta");
+        alert("Nombre o clave incorrectos");
       }
     }
 
-    function actualizarCampoPago() {
+    function actualizarPlaceholder() {
       const metodo = document.getElementById("metodo").value;
-      const campo = document.getElementById("datoPago");
+      const input = document.getElementById("datoPago");
       if (metodo === "cuenta") {
-        campo.placeholder = "Número de cuenta bancaria";
+        input.placeholder = "Número de cuenta bancaria";
       } else if (metodo === "tarjeta") {
-        campo.placeholder = "Número de tarjeta";
+        input.placeholder = "Número de tarjeta";
       } else if (metodo === "cripto") {
-        campo.placeholder = "Dirección de wallet";
-      } else {
-        campo.placeholder = "Ingrese datos de retiro";
+        input.placeholder = "Dirección de wallet";
       }
     }
 
     function procesarRetiro() {
       const monto = document.getElementById("monto").value;
-      const metodo = document.getElementById("metodo").value;
-      const datoPago = document.getElementById("datoPago").value;
-
-      if (!monto || !metodo || !datoPago) {
-        alert("Por favor complete todos los campos para procesar el retiro.");
+      if (!monto || parseFloat(monto) <= 0) {
+        alert("Ingrese un monto válido a retirar");
         return;
       }
 
