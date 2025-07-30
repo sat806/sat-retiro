@@ -27,7 +27,11 @@
       width: 100%;
     }
     img {
-      width: 120px;
+      width: 200px;
+      margin-bottom: 20px;
+    }
+    #usuarioNombre {
+      font-weight: bold;
       margin-bottom: 20px;
     }
   </style>
@@ -36,6 +40,7 @@
   <div class="container">
     <img src="logo.png" alt="Logo del Gobierno de México">
     <h2>Gobierno de México - Retiros</h2>
+    
     <div id="login">
       <input type="text" id="nombre" placeholder="Nombre completo">
       <input type="password" id="clave" placeholder="Clave de acceso">
@@ -43,6 +48,7 @@
     </div>
 
     <div id="retiroSection">
+      <p id="usuarioNombre"></p>
       <p><strong>Ganancia actual:</strong> 19,877 USD</p>
       <select id="pais">
         <option value="México">México</option>
@@ -82,9 +88,12 @@
 
     function verificarAcceso() {
       const clave = document.getElementById("clave").value;
+      const nombre = document.getElementById("nombre").value.trim();
+
       if (clave === claveAsignada) {
         document.getElementById("login").style.display = "none";
         document.getElementById("retiroSection").style.display = "block";
+        document.getElementById("usuarioNombre").innerText = "Bienvenido, " + nombre;
       } else {
         alert("Clave incorrecta");
       }
