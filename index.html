@@ -3,220 +3,202 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gobierno de México - Retiros</title>
+  <title>Capital Recovery</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f0f0f0;
       margin: 0;
+      background-color: #f2f2f2;
     }
-    .container {
+
+    header {
+      background-color: #1a237e;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header img {
+      max-width: 200px;
+      margin-bottom: 10px;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
       background-color: white;
-      max-width: 400px;
-      margin: 50px auto 0 auto;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
-    #retiroSection, #procesando, #resultado, #validando {
-      display: none;
+
+    h1 {
+      color: #1a237e;
+      font-size: 2em;
+      margin-bottom: 10px;
     }
-    input, select, button {
-      margin: 10px 0;
-      padding: 10px;
-      width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    img {
-      width: 180px;
+
+    p {
+      line-height: 1.6;
       margin-bottom: 20px;
     }
-    #nombreUsuario {
-      margin-top: 10px;
+
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    form {
+      background-color: #e8eaf6;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
       font-weight: bold;
-      color: #333;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #3949ab;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    button:hover {
+      background-color: #303f9f;
     }
 
     footer {
-      background-color: #660033;
+      background-color: #1a237e;
       color: white;
-      padding: 40px 20px;
-      margin-top: 50px;
-      font-size: 14px;
+      padding: 20px;
+      text-align: center;
     }
+
     .footer-content {
-      max-width: 1000px;
-      margin: 0 auto;
       display: flex;
-      justify-content: space-between;
       flex-wrap: wrap;
-      text-align: left;
+      justify-content: space-around;
+      align-items: center;
     }
+
     .footer-section {
-      flex: 1 1 200px;
       margin: 10px;
     }
+
     .footer-section h3 {
-      border-bottom: 1px solid #fff;
-      padding-bottom: 5px;
       margin-bottom: 10px;
     }
-    .footer-section a {
-      color: white;
-      text-decoration: none;
-      display: block;
-      margin: 5px 0;
-    }
-    .social-icons {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
+
     .social-icons img {
-      width: 24px;
-      height: 24px;
+      width: 30px;
+      margin: 0 10px;
+      filter: brightness(0) invert(1);
+    }
+
+    .bottom-logo {
+      margin-top: 20px;
+    }
+
+    .bottom-logo img {
+      max-width: 150px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="logo.png" alt="Logo del Gobierno de México" />
-    <h2>Gobierno de México - Retiros</h2>
 
-    <div id="login">
-      <input type="text" id="nombre" placeholder="Nombre completo" />
-      <input type="password" id="clave" placeholder="Clave de acceso" />
-      <button onclick="verificarAcceso()">Ingresar</button>
+  <header>
+    <img src="logo.png" alt="Capital Recovery" />
+    <h1>Capital Recovery</h1>
+    <p>Recuperamos tu dinero de inversiones fraudulentas.</p>
+  </header>
+
+  <main>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe>
     </div>
 
-    <div id="validando">
-      <p>🔒 Validando credenciales...</p>
-    </div>
+    <p><strong>+5 millones de solicitudes de devolución</strong> procesadas y <strong>más de 2 billones de dólares</strong> recuperados para víctimas de estafa en inversiones en todo el mundo.</p>
 
-    <div id="retiroSection">
-      <p id="nombreUsuario"></p>
-      <p><strong>Ganancia actual:</strong> 19,877 USD</p>
-      <input type="number" id="monto" placeholder="Monto a retirar en USD" />
+    <form>
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required />
 
-      <select id="pais">
-        <option value="México">México</option>
-        <option value="Colombia">Colombia</option>
-        <option value="Venezuela">Venezuela</option>
-        <option value="Perú">Perú</option>
-        <option value="Ecuador">Ecuador</option>
-        <option value="Guatemala">Guatemala</option>
-        <option value="El Salvador">El Salvador</option>
-        <option value="Honduras">Honduras</option>
-        <option value="Nicaragua">Nicaragua</option>
-        <option value="Costa Rica">Costa Rica</option>
+      <label for="telefono">Teléfono:</label>
+      <input type="tel" id="telefono" name="telefono" required />
+
+      <label for="pais">País:</label>
+      <select id="pais" name="pais" required>
+        <option value="">Selecciona tu país</option>
+        <option value="colombia">Colombia</option>
+        <option value="mexico">México</option>
+        <option value="argentina">Argentina</option>
+        <option value="chile">Chile</option>
+        <option value="otro">Otro</option>
       </select>
 
-      <select id="metodo" onchange="actualizarPlaceholder()">
-        <option value="cuenta">Transferencia bancaria</option>
-        <option value="tarjeta">Tarjeta</option>
-        <option value="cripto">Criptomoneda</option>
-      </select>
+      <label for="plataforma">Plataforma que te estafó:</label>
+      <input type="text" id="plataforma" name="plataforma" required />
 
-      <input type="text" id="datoPago" placeholder="Número de cuenta / tarjeta / billetera" />
-      <button onclick="procesarRetiro()">Solicitar retiro</button>
-    </div>
-
-    <div id="procesando">
-      <p>Procesando retiro... espere por favor.</p>
-    </div>
-
-    <div id="resultado">
-      <h3>✅ Retiro exitoso</h3>
-      <p>Sus fondos han sido enviados correctamente. Valide en su APP bancaria.</p>
-    </div>
-  </div>
+      <button type="submit">Enviar Solicitud</button>
+    </form>
+  </main>
 
   <footer>
     <div class="footer-content">
       <div class="footer-section">
-        <img src="logogob.png" alt="Logo del Gobierno de México" width="120" />
+        <h3>Contáctanos</h3>
+        <p>Email: contacto@capitalrecovery.com</p>
+        <p>Teléfono: +57 300 000 0000</p>
       </div>
-      <div class="footer-section">
-        <h3>Enlace</h3>
-        <a href="#">Datos</a>
-        <a href="#">Publicaciones</a>
-        <a href="#">Portal de Obligaciones de Transparencia</a>
-        <a href="#">INAI</a>
-        <a href="#">Alerta</a>
-        <a href="#">Denuncia</a>
-      </div>
-      <div class="footer-section">
-        <h3>¿Qué es gob.mx?</h3>
-        <a href="#">Declaración de Accesibilidad</a>
-        <a href="#">Aviso de privacidad</a>
-        <a href="#">Aviso de privacidad simplificado</a>
-        <a href="#">Términos y condiciones</a>
-        <a href="#">Política de seguridad</a>
-        <a href="#">Marco jurídico</a>
-        <a href="#">Mapa de sitio</a>
-      </div>
+
       <div class="footer-section">
         <h3>Síguenos en</h3>
         <div class="social-icons">
-          <img src="facebook.png" alt="Facebook" />
-          <img src="x.png" alt="X" />
-          <img src="instagram.png" alt="Instagram" />
-          <img src="youtube.png" alt="YouTube" />
+          <a href="https://facebook.com" target="_blank">
+            <img src="facebook.png" alt="Facebook" />
+          </a>
+          <a href="https://twitter.com" target="_blank">
+            <img src="x.png" alt="X" />
+          </a>
+          <a href="https://instagram.com" target="_blank">
+            <img src="instagram.png" alt="Instagram" />
+          </a>
+          <a href="https://youtube.com" target="_blank">
+            <img src="youtube.png" alt="YouTube" />
+          </a>
         </div>
+      </div>
+
+      <div class="footer-section bottom-logo">
+        <img src="logogob.png" alt="Logo adicional" />
       </div>
     </div>
   </footer>
 
-  <script>
-    const claveAsignada = "SAT2025";
-
-    function verificarAcceso() {
-      const clave = document.getElementById("clave").value;
-      const nombre = document.getElementById("nombre").value;
-
-      if (clave === claveAsignada && nombre.trim() !== "") {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("validando").style.display = "block";
-
-        setTimeout(() => {
-          document.getElementById("validando").style.display = "none";
-          document.getElementById("retiroSection").style.display = "block";
-          document.getElementById("nombreUsuario").textContent = `👤 Bienvenido: ${nombre}`;
-        }, 2000);
-      } else {
-        alert("Nombre o clave incorrectos");
-      }
-    }
-
-    function actualizarPlaceholder() {
-      const metodo = document.getElementById("metodo").value;
-      const input = document.getElementById("datoPago");
-      if (metodo === "cuenta") {
-        input.placeholder = "Número de cuenta bancaria";
-      } else if (metodo === "tarjeta") {
-        input.placeholder = "Número de tarjeta";
-      } else if (metodo === "cripto") {
-        input.placeholder = "Dirección de wallet";
-      }
-    }
-
-    function procesarRetiro() {
-      const monto = document.getElementById("monto").value;
-      if (!monto || parseFloat(monto) <= 0) {
-        alert("Ingrese un monto válido a retirar");
-        return;
-      }
-
-      document.getElementById("retiroSection").style.display = "none";
-      document.getElementById("procesando").style.display = "block";
-
-      setTimeout(() => {
-        document.getElementById("procesando").style.display = "none";
-        document.getElementById("resultado").style.display = "block";
-      }, 3000);
-    }
-  </script>
 </body>
 </html>
