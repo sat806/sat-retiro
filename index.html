@@ -1,190 +1,153 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Retiros - SAT</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capital Recovery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f0f0f0;
+      font-family: 'Roboto', sans-serif;
       margin: 0;
+      padding: 0;
+      background-color: #f5f7fa;
+      color: #1f2937;
     }
-    .container {
+
+    header {
+      background-color: #1e3a8a;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    header img.logo {
+      height: 60px;
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    main {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 2rem;
       background-color: white;
-      max-width: 400px;
-      margin: 50px auto;
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
-    input, select, button {
-      margin: 10px 0;
-      padding: 10px;
-      width: 100%;
+
+    h1 {
+      color: #1e3a8a;
+      font-size: 2rem;
+      margin-bottom: 1rem;
     }
-    #retiroSection, #procesando, #resultado, #validando {
-      display: none;
+
+    p {
+      margin-bottom: 1.2rem;
     }
-    #nombreUsuario {
-      margin-top: 10px;
-      font-weight: bold;
-      color: #333;
-    }
-    footer {
-      background-color: #600028;
-      color: white;
-      padding: 20px;
-      font-size: 14px;
-    }
-    footer .footer-content {
-      max-width: 1000px;
-      margin: auto;
+
+    form {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+      flex-direction: column;
     }
-    footer div {
-      margin: 10px;
-      min-width: 150px;
+
+    input, select {
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 1rem;
     }
-    footer img {
-      width: 180px;
-      margin-bottom: 15px;
-    }
-    footer a {
+
+    button {
+      background-color: #1e3a8a;
       color: white;
-      text-decoration: none;
-      display: block;
-      margin: 4px 0;
+      padding: 0.75rem;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3749a3;
+    }
+
+    .gov-logo {
+      width: 100px;
+      margin-top: 2rem;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      margin-top: 2rem;
+      color: #64748b;
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <img src="LOGO.png" alt="Logo SAT" style="width:180px; margin-bottom: 20px;">
-    <h2>SAT - Solicitudes de devolución</h2>
+  <header>
+    <img src="logo.png" alt="Logo Capital Recovery" class="logo" />
+    <h1>Capital Recovery</h1>
+  </header>
 
-    <div id="login">
-      <input type="text" id="nombre" placeholder="Nombre completo">
-      <input type="password" id="clave" placeholder="Clave de acceso">
-      <button onclick="verificarAcceso()">Ingresar</button>
-    </div>
+  <main>
+    <p>En Capital Recovery ayudamos a víctimas de estafas en inversiones a recuperar su dinero de manera efectiva y segura.</p>
+    <p>Hemos realizado más de <strong>5 millones</strong> de solicitudes de devolución y entregado más de <strong>dos billones de dólares</strong> a personas afectadas. Solo cobramos <strong>después</strong> de que recibas el desembolso de tus fondos.</p>
+    <p>Completa el siguiente formulario para recibir atención personalizada y comenzar tu proceso de recuperación.</p>
 
-    <div id="validando">
-      <p>🔒 Validando credenciales...</p>
-    </div>
+    <form id="lead-form">
+      <input type="text" name="Nombre" placeholder="Nombre completo" required />
+      <input type="tel" name="TELEFONO" placeholder="Teléfono (solo números)" pattern="[0-9]+" required />
+      <input type="text" name="País" placeholder="País" required />
+      <input type="text" name="Plataforma que te estafó" placeholder="Plataforma que te estafó" required />
+      <button type="submit">Registrarme ahora</button>
+    </form>
 
-    <div id="retiroSection">
-      <p id="nombreUsuario"></p>
-      <p><strong>Ganancia actual:</strong> 19,877 USD</p>
-      <input type="number" id="monto" placeholder="Monto a retirar en USD">
-
-      <select id="pais">
-        <option value="México">México</option>
-        <option value="Colombia">Colombia</option>
-        <option value="Venezuela">Venezuela</option>
-        <option value="Perú">Perú</option>
-        <option value="Ecuador">Ecuador</option>
-        <option value="Guatemala">Guatemala</option>
-        <option value="El Salvador">El Salvador</option>
-        <option value="Honduras">Honduras</option>
-        <option value="Nicaragua">Nicaragua</option>
-        <option value="Costa Rica">Costa Rica</option>
-      </select>
-
-      <select id="metodo" onchange="actualizarPlaceholder()">
-        <option value="cuenta">Transferencia bancaria</option>
-        <option value="tarjeta">Tarjeta</option>
-        <option value="cripto">Criptomoneda</option>
-      </select>
-
-      <input type="text" id="datoPago" placeholder="Número de cuenta / tarjeta / billetera">
-      <button onclick="procesarRetiro()">Solicitar retiro</button>
-    </div>
-
-    <div id="procesando">
-      <p>Procesando retiro... espere por favor.</p>
-    </div>
-
-    <div id="resultado">
-      <h3>✅ Retiro exitoso</h3>
-      <p>Sus fondos han sido enviados correctamente. Verifique en su app bancaria.</p>
-    </div>
-  </div>
-
-  <footer>
-    <div class="footer-content">
-      <div><img src="logogob.png" alt="Logotipo Gobierno de México"></div>
-      <div>
-        <strong>Enlace</strong>
-        <a href="#">Datos</a>
-        <a href="#">Publicaciones</a>
-        <a href="#">Portal de Transparencia</a>
-        <a href="#">INAI</a>
-        <a href="#">Alerta</a>
-        <a href="#">Denuncia</a>
-      </div>
-      <div>
-        <strong>¿Qué es gob.mx?</strong>
-        <a href="#">Portal único de trámites</a>
-        <a href="#">Accesibilidad</a>
-        <a href="#">Aviso de privacidad</a>
-        <a href="#">Términos y condiciones</a>
-        <a href="#">Política de seguridad</a>
-      </div>
-    </div>
-  </footer>
+    <footer>
+      <img src="logogob.png" alt="Gobierno" class="gov-logo" />
+      <p>Recuperamos tu dinero con respaldo jurídico y experiencia internacional.</p>
+    </footer>
+  </main>
 
   <script>
-    const claveAsignada = "SAT2025";
+    const form = document.getElementById('lead-form');
 
-    function verificarAcceso() {
-      const clave = document.getElementById("clave").value;
-      const nombre = document.getElementById("nombre").value;
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-      if (clave === claveAsignada && nombre.trim() !== "") {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("validando").style.display = "block";
+      const formData = new FormData(form);
+      const data = {};
 
-        setTimeout(() => {
-          document.getElementById("validando").style.display = "none";
-          document.getElementById("retiroSection").style.display = "block";
-          document.getElementById("nombreUsuario").textContent = `👤 Bienvenido: ${nombre}`;
-        }, 2000);
-      } else {
-        alert("Nombre o clave incorrectos");
+      formData.forEach((value, key) => {
+        data[key] = value;
+      });
+
+      try {
+        await axios.post('https://api.airtable.com/v0/YOUR_BASE_ID/YOUR_TABLE_NAME',
+          { fields: data },
+          {
+            headers: {
+              'Authorization': 'Bearer YOUR_API_KEY',
+              'Content-Type': 'application/json'
+            }
+          });
+        alert('Registro exitoso. Pronto nos pondremos en contacto.');
+        form.reset();
+      } catch (error) {
+        alert('Ocurrió un error al registrar tus datos. Intenta nuevamente.');
+        console.error(error);
       }
-    }
-
-    function actualizarPlaceholder() {
-      const metodo = document.getElementById("metodo").value;
-      const input = document.getElementById("datoPago");
-      if (metodo === "cuenta") {
-        input.placeholder = "Número de cuenta bancaria";
-      } else if (metodo === "tarjeta") {
-        input.placeholder = "Número de tarjeta";
-      } else if (metodo === "cripto") {
-        input.placeholder = "Dirección de wallet";
-      }
-    }
-
-    function procesarRetiro() {
-      const monto = document.getElementById("monto").value;
-      if (!monto || parseFloat(monto) <= 0) {
-        alert("Ingrese un monto válido a retirar");
-        return;
-      }
-
-      document.getElementById("retiroSection").style.display = "none";
-      document.getElementById("procesando").style.display = "block";
-
-      setTimeout(() => {
-        document.getElementById("procesando").style.display = "none";
-        document.getElementById("resultado").style.display = "block";
-      }, 3000);
-    }
+    });
   </script>
 </body>
+
 </html>
